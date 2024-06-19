@@ -1,0 +1,215 @@
+package cc.ralee.filterplayer;
+
+import android.media.MediaPlayer;
+import android.util.Log;
+import android.view.Surface;
+import android.widget.SeekBar;
+
+import java.io.File;
+import java.io.IOException;
+
+import tv.danmaku.ijk.media.player.IjkMediaPlayer;
+import tv.danmaku.ijk.media.player.IMediaPlayer;
+
+/**
+ * MediaPlayer plays video to a surface ,then use OpenGL renderer the surface
+ */
+
+
+public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListener {
+    public static final String TAG = "MediaPlayerWithSurface";
+    private IjkMediaPlayer mediaPlayer;
+    private String videoPath;
+    private Surface mSurface;
+    private SeekBar seekBar;
+    private boolean isPlaying = false ;
+    public MediaPlayerWithSurface(String videoPath, Surface mSurface, SeekBar seekBar) {
+        this.mSurface = mSurface;
+        this.videoPath = videoPath;
+        mediaPlayer = new IjkMediaPlayer();
+        this.seekBar = seekBar;
+    }
+    public void playVideoToSurface() {
+        preparePlayer();
+    }
+    public void changeVideoPath(String newVideoPath) {
+        this.videoPath = newVideoPath;
+
+
+    }
+    private void preparePlayer() {
+        mediaPlayer.reset();
+        File file = new File(videoPath);
+        Log.d("Moive File", "videoPath:" + videoPath);
+        Log.d("Moive File", "Exists:" + file.exists());
+        Log.d("Moive File", "filePath:" + file.getPath());
+        try {
+            if(file.exists()) {
+                mediaPlayer.setDataSource(file.getPath());
+            }else{
+                mediaPlayer.setDataSource(videoPath);
+            }
+            mediaPlayer.setScreenOnWhilePlaying(true);
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.setLooping(true);
+
+
+
+
+            if (true) {
+                // Param for living
+                mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max_cached_duration", 30);
+                mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "infbuf", 1);
+                mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 0);
+            } else {
+                // Param for playback
+                mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max_cached_duration", 0);
+                mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "infbuf", 0);
+                mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 1);
+            }
+
+            //开启硬编码
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
+
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 1);
+
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "fast", 1);//www不额外优化www
+
+            // 设置丢帧阈值
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "framedrop", 1);
+            // 设置视频帧率
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "fps", 30); ///原30
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max-fps", 20);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", IjkMediaPlayer.SDL_FCC_YV12);
+            // 设置环路滤波
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 0);
+            // 设置无 packet 缓存
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 0);//实时性
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "buffer_size", 1024);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "fflags", "nobuffer");
+            // 不限制拉流缓存大小
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "infbuf", "1");
+            // 设置最大缓存数量
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "max-buffer-size", 0);
+            // 设置最小解码帧数
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "min-frames", 3);
+            // 预加载
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 1);//实时性
+            // 设置探测包数量
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probesize", 409600);// 该参数调小可解决卡顿问题以及起播问题
+            // 设置分析流时长
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "analyzeduration", 5000);//起播问题相关
+
+            // 最大缓冲cache是3s， 有时候网络波动，会突然在短时间内收到好几秒的数据
+            // 因此需要播放器丢包，才不会累积延时
+            // 这个和第三个参数packet-buffering无关。
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max_cached_duration",30);//www0
+
+
+
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "analyzemaxduration", 20000000);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "flush_packets", 1L);
+            //静音设置
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "an", 1);
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_transport", "tcp");
+
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "protocol_whitelist", "crypto,file,http,https,tcp,tls,udp,rtp,rtsp");
+            // 清空DNS,有时因为在APP里面要播放多种类型的视频(如:MP4,直播,直播平台保存的视频,和其他http视频), 有时会造成因为DNS的问题而报10000问题
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "dns_cache_clear", 1);
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "protocol_whitelist", "async,cache,crypto,file,http,https,ijkhttphook,ijkinject,ijklivehook,ijklongurl,ijksegment,ijktcphook,pipe,rtp,tcp,tls,udp,ijkurlhook,data,concat,subfile,udp,ffconcat");
+
+           // mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT,"safe",0);
+            mediaPlayer.prepareAsync();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onPrepared(IMediaPlayer mp) {
+
+        mediaPlayer.setSurface(mSurface);
+        mediaPlayer.start();
+        isPlaying = true;
+        seekBar.setProgress(0);
+        seekBar.setMax((int)mediaPlayer.getDuration());
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (progress >= 0) {
+                    if (fromUser) {
+                        mediaPlayer.seekTo(progress);
+                    }
+                }
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+/*
+        final Boolean seekBarAutoFlag = true;
+        // deal with the seekbar's move
+        Thread moveThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while(seekBarAutoFlag) {
+                        if( mediaPlayer != null && isPlaying) {
+                            seekBar.setProgress((int)mediaPlayer.getCurrentPosition());
+                        }
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });*/
+        //moveThread.start();
+
+    }
+
+    public void pausePlay() {
+        Log.d("Player", "pausePlay: ");
+        mediaPlayer.pause();
+        isPlaying = false;
+    }
+
+    public void startPlay() {
+
+        mediaPlayer.start();
+        Log.d("Player", "startPlay: ");
+        isPlaying = true;
+
+    }
+
+    public void restart() {
+        try {
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(videoPath);
+            mediaPlayer.setScreenOnWhilePlaying(true);
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.prepareAsync();
+            mediaPlayer.setLooping(true);
+
+        }catch (IOException e ) {
+            e.printStackTrace();
+        }
+    }
+
+    public void release() {
+        if(mediaPlayer != null ) {
+            mediaPlayer.release();
+            mediaPlayer = null ;
+        }
+    }
+
+}

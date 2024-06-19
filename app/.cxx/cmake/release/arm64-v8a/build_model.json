@@ -1,0 +1,71 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master",
+      "sdkFolder": "D:\\android\\android-studio-download-sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\build\\intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app",
+      "makeFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\src\\main\\cpp\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\.cxx",
+      "cxxFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx",
+      "ndkFolder": "D:\\android\\android-studio-download-sdk\\ndk\\21.4.7075529",
+      "ndkVersion": "21.4.7075529",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [
+      "-DANDROID_STL\u003dc++_static"
+    ],
+    "cFlagList": [],
+    "cppFlagsList": [
+      "-frtti -fexceptions -std\u003dc++11 -O2"
+    ],
+    "variantName": "release",
+    "soFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\build\\intermediates\\cmake\\release\\lib",
+    "objFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\build\\intermediates\\cmake\\release\\obj",
+    "jsonFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release",
+    "gradleBuildOutputFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARM64_V8A"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARM64_V8A",
+  "abiPlatformVersion": 21,
+  "cxxBuildFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release\\arm64-v8a",
+  "jsonFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release\\arm64-v8a\\android_gradle_build.json",
+  "gradleBuildOutputFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a",
+  "objFolder": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\build\\intermediates\\cmake\\release\\obj\\arm64-v8a",
+  "buildCommandFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release\\arm64-v8a\\build_command.txt",
+  "buildOutputFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release\\arm64-v8a\\build_output.txt",
+  "modelOutputFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release\\arm64-v8a\\build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a\\CMakeLists.txt",
+    "toolchainWrapperFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a\\android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a\\build_generation_state.json",
+    "cacheKeyFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_cache_key.json",
+    "compilerCacheUseFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_cache_use.json",
+    "compilerCacheWriteFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release\\arm64-v8a\\json_generation_record.json",
+  "compileCommandsJsonFile": "D:\\work\\FilterPlayer-master\\FilterPlayer-master\\app\\.cxx\\cmake\\release\\arm64-v8a\\compile_commands.json"
+}
