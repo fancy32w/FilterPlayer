@@ -172,8 +172,8 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
                 dialog.show();
                 Log.d(TAG, "New Video path" + videoPath);*/
 
-//                videoRenderer.changeVideoPathAndPlay("rtp://0.0.0.0:50000");
-                videoRenderer.changeVideoPathAndPlay("https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8?contentid=2820180516001");
+                videoRenderer.changeVideoPathAndPlay("rtp://0.0.0.0:50000");
+//                videoRenderer.changeVideoPathAndPlay("https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8?contentid=2820180516001");
 
                 break;
 
