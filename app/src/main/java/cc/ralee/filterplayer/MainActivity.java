@@ -165,16 +165,16 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.open_file:// Open video file
-/*                if(dialog == null) {
-                    setSelectDialog();
-                    Log.d(TAG, "Dialog setted");
-                }
-                dialog.show();
-                Log.d(TAG, "New Video path" + videoPath);*/
-
+//               if(dialog == null) {
+//                    setSelectDialog();
+//                    Log.d(TAG, "Dialog setted");
+//                }
+//                dialog.show();
+//                Log.d(TAG, "New Video path" + videoPath);
+//                videoRenderer.changeVideoPathAndPlay("/storage/self/primary/4K-420.264");
                 videoRenderer.changeVideoPathAndPlay("rtp://0.0.0.0:50000");
 //                videoRenderer.changeVideoPathAndPlay("https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8?contentid=2820180516001");
-
+//
                 break;
 
             case R.id.glSurfaceView:
