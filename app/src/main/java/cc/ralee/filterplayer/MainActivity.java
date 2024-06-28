@@ -171,7 +171,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
 //                }
 //                dialog.show();
 //                Log.d(TAG, "New Video path" + videoPath);
-//                videoRenderer.changeVideoPathAndPlay("/storage/self/primary/4K-420.264");
+//                videoRenderer.changeVideoPathAndPlay("/storage/self/primary/4K_beijing_30fps_timestamp.mp4");
                 videoRenderer.changeVideoPathAndPlay("rtp://0.0.0.0:50000");
 //                videoRenderer.changeVideoPathAndPlay("https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8?contentid=2820180516001");
 //

@@ -43,6 +43,8 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
         Log.d("Moive File", "videoPath:" + videoPath);
         Log.d("Moive File", "Exists:" + file.exists());
         Log.d("Moive File", "filePath:" + file.getPath());
+
+
         try {
             if(file.exists()) {
                 mediaPlayer.setDataSource(file.getPath());
@@ -69,10 +71,10 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
             }
 
             //开启硬编码
-            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
-            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
-            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
-            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
 
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 1);
 
@@ -108,11 +110,16 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
 
 
             //设置音视频解码器格式格式
+            //audio
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "ac", 2);                  //channels
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "ar", 48000);              //sample_rate
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "channel_layout", 3);      //channel_layout
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "frame_size", 1024);       //frame_size
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "request_sample_fmt", 8);  //sample_fmt
+            //video
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "pixel_format", 0);
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "video_size", 1920); //{"video_size", "set video size", OFFSET(width), AV_OPT_TYPE_IMAGE_SIZE, {.str=NULL}, 0, INT_MAX, 0 }
+
 
 
             //静音设置

@@ -24,7 +24,7 @@
 static const char m7_req_3[] = "\r\n\r\n";
 static const char m1_options_rsp[] = "RTSP/1.0 200 OK\r\nDate: Sun, 11 Aug 2013 04:41:40 +000\r\nServer: stagefright/1.2 (Linux;Android 4.3)\r\nCSeq: 1\r\nPublic: org.wfa.wfd1.0, GET_PARAMETER, SET_PARAMETER\r\n\r\n";
 static const char m2_req[] = "OPTIONS * RTSP/1.0\r\nDate: Sun, 11 Aug 2013 04:41:40 +000\r\nServer: stagefright/1.2 (Linux;Android 4.3)\r\nCSeq: 2\r\nRequire: org.wfa.wfd1.0\r\n\r\n";
-static const char m3_body[] = "wfd_video_formats: 00 00 02 02 000000FF 00000000 00000000 00 0000 0000 00 none none\r\nwfd_audio_codecs: LPCM 00000002 00, AAC 00000001 00\r\nwfd_client_rtp_ports: RTP/AVP/UDP;unicast 50000 0 mode=play\r\nwfd_connector_type: 07\r\nwfd_uibc_capability: none\r\nwfd_content_protection: none\r\nwfd_idr_request_capability: 1\r\n";
+static const char m3_body[] = "wfd_video_formats: 00 00 02 02 000000FF 00000000 00000000 00 0000 0000 00 none none\r\nwfd_audio_codecs: LPCM 00000002 00, AAC 00000001 00\r\nwfd_client_rtp_ports: RTP/AVP/UDP;unicast 50000 0 mode=play\r\nwfd_connector_type: 07\r\n";
 static const char m3_rsp_1[] = "RTSP/1.0 200 OK\r\nDate: Sun, 11 Aug 2013 04:41:40 +000\r\nServer: stagefright/1.2 (Linux;Android 4.3)\r\nCSeq: 2\r\nContent-Type: text/parameters\r\nContent-Length: ";
 static const char m4_rsp[] = "RTSP/1.0 200 OK\r\nDate: Sun, 11 Aug 2013 04:41:40 +000\r\nServer: stagefright/1.2 (Linux;Android 4.3)\r\nCSeq: 3\r\n\r\n";
 static const char m5_rsp[] = "RTSP/1.0 200 OK\r\nDate: Sun, 11 Aug 2013 04:41:40 +000\r\nServer: stagefright/1.2 (Linux;Android 4.3)\r\nCSeq: 4\r\n\r\n";
