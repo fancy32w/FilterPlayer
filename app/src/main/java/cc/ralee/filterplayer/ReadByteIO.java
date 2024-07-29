@@ -1,9 +1,8 @@
-package tv.danmaku.ijk.media.player;
+package cc.ralee.filterplayer;
 
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import tv.danmaku.ijk.media.player.misc.IAndroidIO;
