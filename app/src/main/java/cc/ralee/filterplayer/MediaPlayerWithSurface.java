@@ -7,14 +7,11 @@ import android.widget.SeekBar;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import tv.danmaku.ijk.media.player.FileAndroidIO;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
-import tv.danmaku.ijk.media.player.ReadByteIO;
 
 /**
  * MediaPlayer plays video to a surface ,then use OpenGL renderer the surface
