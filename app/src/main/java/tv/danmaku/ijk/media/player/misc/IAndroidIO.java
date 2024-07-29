@@ -22,7 +22,7 @@ import java.io.IOException;
 @SuppressWarnings("RedundantThrows")
 public interface IAndroidIO {
     int  open(String url) throws IOException;
-    int  read(byte[] buffer, int size) throws IOException;
+    int  read(byte[] buffer, int size) throws IOException, InterruptedException;
     long seek(long offset, int whence) throws IOException;
     int  close() throws IOException;
 }

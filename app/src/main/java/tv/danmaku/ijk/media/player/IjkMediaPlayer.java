@@ -524,6 +524,16 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
 
     public native void _prepareAsync() throws IllegalStateException;
 
+    public native void _pushVideoPacket(byte[] frameData, int frameSize);
+
+    public native void _pushAudioPacket(byte[] frameData, int frameSize);
+
+    public void pushVideoPacket(byte[] frameData) {
+        _pushVideoPacket(frameData, frameData.length);
+    }
+    public void pushAudioPacket(byte[] frameData) {
+        _pushAudioPacket(frameData, frameData.length);
+    }
     @Override
     public void start() throws IllegalStateException {
         stayAwake(true);

@@ -85,7 +85,6 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
         control = (LinearLayout)findViewById(R.id.control);
         glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekbar);
-        Log.d(TAG, "!!!videoPath1:"+videoPath);
         videoRenderer = new VideoRenderer(MainActivity.this, glSurfaceView, seekBar, videoPath);
         glSurfaceView.setEGLContextClientVersion(2);
         glSurfaceView.setRenderer(videoRenderer);
@@ -160,7 +159,6 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -171,8 +169,10 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
 //                }
 //                dialog.show();
 //                Log.d(TAG, "New Video path" + videoPath);
+//                videoRenderer.changeVideoPathAndPlay("/storage/self/primary/frames_h264/frame_0001.264");
 //                videoRenderer.changeVideoPathAndPlay("/storage/self/primary/4K_beijing_30fps_timestamp.mp4");
-                videoRenderer.changeVideoPathAndPlay("rtp://0.0.0.0:50000");
+                videoRenderer.changeVideoPathAndPlay("");
+//                videoRenderer.changeVideoPathAndPlay("rtp://0.0.0.0:50000");
 //                videoRenderer.changeVideoPathAndPlay("https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8?contentid=2820180516001");
 //
                 break;
