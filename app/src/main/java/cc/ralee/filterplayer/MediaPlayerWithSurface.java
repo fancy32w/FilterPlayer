@@ -69,7 +69,9 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
         mediaPlayer.setScreenOnWhilePlaying(true);
         mediaPlayer.setOnPreparedListener(this);
         mediaPlayer.setLooping(true);
+//        mediaPlayer.native_setLogLevel(IjkMediaPlayer.IJK_LOG_SILENT); //设置日志打印等级
 
+        //如果videoPath为空则通过AndroidIO形式调用
         if(!videoPath.equals("")) {
             File file = new File(videoPath);
             boolean rtpFlag = false;
@@ -153,7 +155,7 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
             //设置tcp传输
 //            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_transport", "tcp");
 
-            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "protocol_whitelist", "ijkio,crypto,file,http,https,tcp,tls,udp");
+//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "protocol_whitelist", "ijkio,crypto,file,http,https,tcp,tls,udp,rtp");
 
             // 清空DNS,有时因为在APP里面要播放多种类型的视频(如:MP4,直播,直播平台保存的视频,和其他http视频), 有时会造成因为DNS的问题而报10000问题
 //            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "dns_cache_clear", 1);
@@ -166,33 +168,39 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
 
         }else{
 
-//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
-//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
-//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
-//            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "analyzemaxduration", 100);
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probesize", 1024);
-            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 0);
-
+            mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 0); //解决插入音视频包不播放的问题
+;
             final ReadByteIO rio = new ReadByteIO();
             rio.reset();
             // 启动一个新的线程来插入数据
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    for (int i = 0; i <= 0; i++) {
-                        String targetFilePath = String.format("/storage/self/primary/out3.flv");
-                        byte[] frameData = new byte[0];
-                        try {
-                            frameData = readFrameData(targetFilePath);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        if (frameData != null) {
-                            rio.addLast(frameData);
-
+                    for (int i = 0; i <= 100; i++) {
+//                        String targetFilePath = String.format("/storage/self/primary/outttt.flv");
+//                        byte[] frameData = new byte[0];
+//                        try {
+//                            frameData= readFrameData(targetFilePath);
+//                        } catch (IOException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//                        if (frameData != null) {
+//                            rio.addLast(frameData);
+//
+//                        }
+                        // 使用硬编码的 FLV 数据
+                        byte[] fixedFrameData = FLVDataHolder.getFrameData();
+                        if (fixedFrameData != null) {
+                        rio.addLast(fixedFrameData);
                         }
                     }
+
 
                     beginPushPakect();
 
@@ -219,8 +227,9 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
         new Thread(new Runnable() {
             @Override
             public void run() {
-                    for (int i = 0; i <= 5; i++) {
-                        String frameFilePath = String.format("/storage/self/primary/frames_aac/frame_%04d.aac", i);
+                for(int j=0;j<2;j++){
+                    for (int i = 0; i <= 60; i++) {
+                        String frameFilePath = String.format("/storage/self/primary/audio_aac/audio_aac_%03d.aac", i);
                         try {
                             byte[] pushframeData = readFrameData(frameFilePath);
                             if (pushframeData != null) {
@@ -231,7 +240,7 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
+                    }}
 
 
 
@@ -241,6 +250,7 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
         new Thread(new Runnable() {
             @Override
             public void run() {
+                for(int j=0;j<=5;j++) {
                     for (int i = 1; i <= 125; i++) {
                         String frameFilePath = String.format("/storage/self/primary/frames_h264/frame_%04d.264", i);
                         try {
@@ -254,6 +264,7 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
                             e.printStackTrace();
                         }
                     }
+                }
 
 
             }
