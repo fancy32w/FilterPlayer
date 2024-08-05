@@ -175,7 +175,10 @@ public class MediaPlayerWithSurface implements  IjkMediaPlayer.OnPreparedListene
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "analyzemaxduration", 100);
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probesize", 1024);
             mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 0); //解决插入音视频包不播放的问题
-;
+
+            //通过解码器名称设置音视频解码器，默认为flv格式中的h264和aac
+//            mediaPlayer.setVideoCodec("hevc");
+//            mediaPlayer.setAudioCodec("mp3");
             final ReadByteIO rio = new ReadByteIO();
             rio.reset();
             // 启动一个新的线程来插入数据

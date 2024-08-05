@@ -528,6 +528,17 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
 
     public native void _pushAudioPacket(byte[] frameData, int frameSize);
 
+    public native void _setAudioCodec(String codecName);
+    public native void _setVideoCodec(String codecName);
+
+    public void setVideoCodec(String codecName) {
+         _setVideoCodec(codecName);
+    }
+
+    public void setAudioCodec(String codecName) {
+        _setAudioCodec(codecName);
+    }
+
     public void pushVideoPacket(byte[] frameData) {
         _pushVideoPacket(frameData, frameData.length);
     }
